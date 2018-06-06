@@ -31,23 +31,8 @@ var mainView = app.views.create('.view-main', {
   url: '/'
 });
 
-//Attendance data fetched
-// var fun = $(function(){
 
-  // var $records=$('records'); // this orders is the id orders fetched from html on which json data has to be appededin inner html
-//   $.ajax({
-//     type: 'GET',
-//     url: '',
-//     success: function(records) {// this orders is the data array from the ajax
-//       $records.append('<tr'+ function(){
-//           $.each(records, function(i,record){// order is one single order from orders array fetched from json
-//           $records.append('<th>'+ record[i] + '</th>');
-//         });
-//       })
-      
-//     }
-//   });
-// });
+
 
 // Login Screen Demo
 $$('#my-login-screen .login-button').on('click', function () {
