@@ -1,9 +1,16 @@
+<template>
   <div class="page" data-name="leave">
-    <div class="navbar">
-      <div class="navbar-inner sliding">
-        <div class="title">Leave</div>
-      </div>
-    </div>
+      <div class="navbar">
+          <div class="navbar-inner">
+            <div class="left">
+              <a href="#" class="link icon-only panel-open" data-panel="left">
+                <i class="icon f7-icons ios-only">menu</i>
+                <i class="icon material-icons md-only">menu</i>
+              </a>
+            </div>
+            <div class="title sliding">eTime Register</div>
+          </div>
+        </div>
 
     <!-- Toolbar-->
                   <div class="toolbar tabbar toolbar-bottom-md">
@@ -35,102 +42,84 @@
       
         
             <div class="block-title">Leave</div>
-            <div class="data-table card">
-              <table>
+            <div class="block block-strong">
+                <div class="row">
+                    <div class="row" style="margin-top: 6px">
+                    
+                    <span class="col">Year</span>
+                    </div>
+                    <div class="row" style="margin-top: 6px">
+                        <div class="list no-hairlines-md">
+                          <ul>
+                            <li>
+                              <div class="item-content item-input">
+                                <div class="item-inner">
+                                  <div class="item-input-wrap">
+                                    <input type="text" placeholder="Your iOS device" readonly="readonly" id="demo-picker-device"/>
+                                  </div>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+<!--                     <select id="yearselect" class="col"></select> -->
+
+                          
+                    </div>
+                    <div class="row">
+                    
+                    <button class="col button button-fill button-round">Show</button>
+                    </div>
+              </div>
+            </div>
+            
+
+              <div class="data-table card">
+
+                <table id="table">
                 <thead>
-                  <tr>
-                    <th class="label-cell">Leave Code</th>
+                  <tr id="headerTR" style="font-weight: bold;">
+                    <th class="label-cell">LeaveType</th>
                     <th class="numeric-cell">Opening</th>
                     <th class="numeric-cell">Availed</th>
-                    <th class="numeric-cell">Closing</th>
+                    <th class="numeric-cell">closing</th>
+                    
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                   <tr>
-                   <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                  <tr>
-                   <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                   <tr>
-                   <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                   <tr>
-                    <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
+                <tbody  id="leaveData">
+                  
                 </tbody>
-              </table>
-            </div>
-            <!--  <div class="data-table card">
-              <table>
-                <thead background:grey, color:black>
-                  <tr>
-                    <th class="label-cell">Leave Code</th>
-                    <th class="numeric-cell">From Date </th>
-                    <th class="numeric-cell">To Date</th>
-                    <th class="numeric-cell">Quantity</th>
-                    <th class="numeric-cell">Reamrks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                   <tr>
-                  <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                  <tr>
-                    <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                   <tr>
-                    <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                   <tr>
-                     <td class="label-cell">LWP</td>
-                    <td class="numeric-cell">2.00</td>
-                    <td class="numeric-cell">1.00</td>
-                    <td class="numeric-cell">0.50</td>
-                    <td class="numeric-cell">0.50</td>
-                  </tr>
-                </tbody>
-              </table>
-       
-      
-          </div> -->
+                </table>  
+                
+              </div>       
+            
   </div>
   </div>
+</template>
+  <script>
+  return {
+    on: {
+      pageInit: function (e, page) {
+        var self = this;
+        var today = new Date();
+        var app = self.$app;
+        console.log(1234);
+        // iOS Device picker
+        self.pickerDevice = app.picker.create({
+          inputEl: '#demo-picker-device',
+          cols: [
+            {
+              textAlign: 'center',
+              values: ['iPhone 4', 'iPhone 4S', 'iPhone 5', 'iPhone 5S', 'iPhone 6', 'iPhone 6 Plus', 'iPad 2', 'iPad Retina', 'iPad Air', 'iPad mini', 'iPad mini 2', 'iPad mini 3']
+            }
+          ]
+        });
+      },
+       pageBeforeRemove() {
+        var self = this;
+        self.pickerDevice.destroy();
+      },
+    }
+  }
+  </script>
   

@@ -1,118 +1,129 @@
-//  function loadAttendance(){
-//   alert("hello");
-      
-// }
+
+ 
+    var count = 0;
+    var start;
+    var end;    
+
+        
 
     function CreateTableFromJSON() {
 
-        var attendance_data = [
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              },
-              {
-                "Date": "04/09/2017",
-                "InTime": "09:23:00",
-                "OutTime": "18:28:00"
-              }
-        ]
+        $.getJSON('./data/attendance.json', function(attendance_data){
+           var start = count > 0 ? 5 * count : count;
+        var end = start + 5;
 
-        // EXTRACT VALUE FOR HTML HEADER. 
-        // ('Book ID', 'Book Name', 'Category' and 'Price')
-        var col = [];
-        for (var i = 0; i < 5; i++) {
-            for (var key in attendance_data[i]) {
-                if (col.indexOf(key) === -1) {
-                    col.push(key);
-                    console.log(key);
-                }
-            }
-        }
-        // console.log(col.length);
-        // console.log(attendance_data.length);
+        var strtable="";
+        var i;
+        var flag=0;
+        $("#showData").empty();
 
-        // CREATE DYNAMIC TABLE.
-        var table = document.createElement("table");
-
-        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
-
-        var tr = table.insertRow(-1);                   // TABLE ROW.
-
-        for (var i = 0; i < col.length; i++) {
-            var th = document.createElement("th");
-            $('th').addClass('numeric-cell')
-                 // TABLE HEADER.
-             // TABLE HEADER.
-            th.innerHTML = col[i];
-            tr.appendChild(th);
+        for (i = start; i < end; i++) {
+          if(i>=attendance_data.length){
+             flag=1;
+             break;
+           }
+          if(flag==0){
+            strtable+="<tr>";
+            strtable+="<td class='label-cell'>"+attendance_data[i].Date+"</td>";
+            strtable+="<td class='numeric-cell'>"+attendance_data[i].InTime+"</td>";
+            strtable+="<td class='numeric-cell'>"+attendance_data[i].OutTime+"</td>";
+            strtable+="</tr>";
+            
+            
+          }
+          console.log(attendance_data[i].Date);
+           
         }
 
-        // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < 5; i++) {
+         if(strtable != ''){
+                $("#showData").append(strtable);
+             }
+        if(flag==1){
+             $('#showData').append("<tr><td colspan='3'>No Data</td></tr>");
+             // document.getElementById("btnAjaxCall").blur();
+             // document.getElementById("btnAjaxCall").style.backgroundColor = "red";
+             document.getElementById("btnAjaxCall").style.display="none";
 
-            tr = table.insertRow(-1);
-
-            for (var j = 0; j < col.length; j++) {
-                var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = attendance_data[i][col[j]];
-            }
         }
+         
+           console.log(end);
 
-        // $("#loadMore").on('click', function(e) {
-        //   e.preventDefault();
+           console.log(count);
+           if(i<=attendance_data.length)
+           {
 
-        //   $(".numeric-cell").slice(0,5).slideDown();
-        //   if($(".numeric-cell").length==0){
-        //     $("#load").fadeOut('slow');
-        //   }
+            count++;
+             document.getElementById("btnAjaxCallNext").style.display="block";
 
+         
+           }
+           console.log(count);
+        
+  
+        });
 
-        // });
-
-        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("showData");
-        divContainer.innerHTML ='';
-        divContainer.appendChild(table);
     }
+ 
+
+    function CreateNextTableFromJSON() {
+
+       $.getJSON('./data/attendance.json', function(attendance_data){
+      console.log(count);
+      if(count>1)
+      {
+
+       count--;
+      document.getElementById("btnAjaxCall").style.display="block";
+
+    
+      }
+      if(count==1){
+          document.getElementById("btnAjaxCallNext").style.display="none";
+
+      }
+      console.log(count);
+        
+
+       
+
+           start = count > 0 ? 5 * (count-1) : count;
+           end = start + 5;
+
+        var strtable="";
+        var i;
+        var flag=0;
+        $("#showData").empty();
+
+        for (i = start; i < end; i++) {
+          if(i>=attendance_data.length){
+             flag=1;
+             break;
+           }
+          if(flag==0){
+            strtable+="<tr>";
+            strtable+="<td class='label-cell'>"+attendance_data[i].Date+"</td>";
+            strtable+="<td class='numeric-cell'>"+attendance_data[i].InTime+"</td>";
+            strtable+="<td class='numeric-cell'>"+attendance_data[i].OutTime+"</td>";
+            strtable+="</tr>";
+            
+            
+          }
+          console.log(attendance_data[i].Date);
+           
+        }
+
+         if(strtable != ''){
+                $("#showData").append(strtable);
+             }
+        if(flag==1){
+             $('#showData').append("<tr><td colspan='3'>No Data</td></tr>");
+        }
+         
+        //  console.log(attendance_data.length);
+           console.log(end);
+           
+
+    });
+  }
+ 
 
